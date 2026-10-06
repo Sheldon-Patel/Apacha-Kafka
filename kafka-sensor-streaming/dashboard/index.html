@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Kafka Sensor Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="brand">
+                <div class="kafka-icon">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1>Sensor Data Streaming</h1>
+                    <p class="subtitle">Apache Kafka Real-Time Telemetry Monitor</p>
+                </div>
+            </div>
+            <div class="stream-status" id="streamStatus">
+                <span class="pulse-dot"></span>
+                <span id="statusText">Waiting for Consumer...</span>
+            </div>
+        </header>
+
+        <!-- Main Grid -->
+        <main class="grid-container">
+            <!-- Primary Gauge Cards -->
+            <div class="card metric-card temperature-card">
+                <div class="card-header">
+                    <span class="card-title">Temperature</span>
+                    <span class="card-icon">🌡️</span>
+                </div>
+                <div class="metric-value">
+                    <span id="tempValue">--</span><span class="unit">°C</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="tempBar" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="card metric-card humidity-card">
+                <div class="card-header">
+                    <span class="card-title">Humidity</span>
+                    <span class="card-icon">💧</span>
+                </div>
+                <div class="metric-value">
+                    <span id="humidityValue">--</span><span class="unit">%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill humidity-fill" id="humidityBar" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Status Card -->
+            <div class="card status-card">
+                <div class="card-header">
+                    <span class="card-title">System Status</span>
+                    <span class="card-icon">⚡</span>
+                </div>
+                <div class="status-badge-container">
+                    <span class="status-badge status-unknown" id="statusBadge">OFFLINE</span>
+                </div>
+            </div>
+
+            <!-- Total Messages Card -->
+            <div class="card message-card">
+                <div class="card-header">
+                    <span class="card-title">Messages Processed</span>
+                    <span class="card-icon">📨</span>
+                </div>
+                <div class="metric-value" id="msgCount">0</div>
+                <div class="card-footer-text">Kafka Topic: <code>sensor-data</code></div>
+            </div>
+
+            <!-- Sensor Metadata Cards -->
+            <div class="card meta-card">
+                <div class="card-header">
+                    <span class="card-title">Sensor ID</span>
+                    <span class="card-icon">🆔</span>
+                </div>
+                <div class="meta-value" id="sensorId">--</div>
+            </div>
+
+            <div class="card meta-card">
+                <div class="card-header">
+                    <span class="card-title">Location</span>
+                    <span class="card-icon">📍</span>
+                </div>
+                <div class="meta-value" id="location">--</div>
+            </div>
+        </main>
+
+        <!-- Footer / Info -->
+        <footer class="footer">
+            <div class="last-updated">
+                Timestamp: <span id="timestamp">No readings received yet</span>
+            </div>
+            <div class="broker-info">
+                Broker: <code>localhost:9092</code>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
